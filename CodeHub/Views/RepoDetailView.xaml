@@ -366,7 +366,7 @@
 
                 <ProgressRing Width="40"
                               Height="40"
-                              Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                              Foreground="{StaticResource AppPrimaryColorBrush}"
                               IsActive="{x:Bind ViewModel.isLoading, Mode=OneWay}"
                               RelativePanel.AlignHorizontalCenterWithPanel="True"
                               RelativePanel.Below="DetailPanel" />
