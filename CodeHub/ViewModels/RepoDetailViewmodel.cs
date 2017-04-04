@@ -90,6 +90,19 @@ namespace CodeHub.ViewModels
             }
         }
 
+        public string _Readme;
+        public string Readme
+        {
+            get
+            {
+                return _Readme;
+            }
+            set
+            {
+                Set(() => Readme, ref _Readme, value);
+            }
+        }
+
         public async Task Load(object repo)
         {
             if (!GlobalHelper.IsInternet())

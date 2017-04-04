@@ -284,6 +284,7 @@
                            RelativePanel.Below="ButtonsPanel"
                            Text="{x:Bind ViewModel.Repository.Description, Mode=OneWay}"
                            TextWrapping="Wrap"
+                           TextAlignment="Center"
                            Visibility="{x:Bind ViewModel.Repository.Description, Converter={StaticResource StringVisibilityConverter}, Mode=OneWay}" />
                 <RelativePanel x:Name="DetailPanel"
                                Margin="20,4,20,0"
@@ -343,31 +344,32 @@
                                Text="{x:Bind ViewModel.Repository.UpdatedAt, Converter={StaticResource TimeAgoConverter}, Mode=OneWay}" />
                 </RelativePanel>
 
-                <Grid x:Name="ReadmeGrid"
-                      Margin="0,16,0,0"
-                      RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignRightWithPanel="True"
-                      RelativePanel.Below="DetailPanel">
-                    <WebView x:Name="ReadmeWebView"
-                             Height="500"
-                             NavigationCompleted="WebView_NavigationCompleted" />
-                    <ProgressRing x:Name="ReadmeLoadingRing"
-                                  Width="32"
-                                  Height="32"
-                                  Margin="0,20,0,0"
-                                  Foreground="{StaticResource AppPrimaryColorBrush}"
-                                  IsHitTestVisible="False"
-                                  RelativePanel.AlignHorizontalCenterWith="ReadmeWebView"
-                                  RelativePanel.Below="DetailPanel" />
-                </Grid>
+                <controls:MarkdownTextBlock x:Name="ReadmeTextBlock"
+                                            Text="{x:Bind ViewModel.Readme,Mode=OneWay}"
+                                            Padding="8"
+                                            Margin="0 12 0 0"
+                                            ImageStretch="Fill"
+                                            FontSize="13"
+                                            LinkClicked="ReadmeTextBlock_LinkClicked"
+                                            RelativePanel.AlignBottomWithPanel="True"
+                                            RelativePanel.AlignLeftWithPanel="True"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            RelativePanel.Below="DetailPanel"/>
+                <ProgressRing x:Name="ReadmeLoadingRing"
+                              Width="32"
+                              Height="32"
+                              Margin="0,20,0,0"
+                              Foreground="{StaticResource AppPrimaryColorBrush}"
+                              IsHitTestVisible="False"
+                              RelativePanel.AlignHorizontalCenterWithPanel="True"
+                              RelativePanel.Below="DetailPanel"/>
 
                 <ProgressRing Width="40"
                               Height="40"
                               Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
                               IsActive="{x:Bind ViewModel.isLoading, Mode=OneWay}"
                               RelativePanel.AlignHorizontalCenterWithPanel="True"
-                              RelativePanel.AlignVerticalCenterWithPanel="True" />
+                              RelativePanel.Below="DetailPanel" />
             </RelativePanel>
         </ScrollViewer>
 
