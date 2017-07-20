@@ -91,12 +91,19 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="app.config" />
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\css\github-markdown.css" />
     <Content Include="Assets\flame.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -105,6 +112,7 @@
     <Content Include="Assets\NewStoreLogo.scale-150.png" />
     <Content Include="Assets\NewStoreLogo.scale-200.png" />
     <Content Include="Assets\NewStoreLogo.scale-400.png" />
+    <Content Include="Assets\Noise.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
@@ -115,6 +123,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\transparent.png" />
     <Content Include="Services\Hilite-me\Samples\Borland.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -171,12 +180,18 @@
     </Content>
     <None Include="CodeHub_TemporaryKey.pfx" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\es\Resources.resw" />
+    <PRIResource Include="Strings\hu-HU\Resources.resw" />
+    <PRIResource Include="Strings\de\Resources.resw" />
+    <PRIResource Include="Strings\pt\Resources.resw" />
+    <PRIResource Include="Strings\vi\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\zh-Hans\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AlternatingRowListView.cs" />
     <Compile Include="Controls\AnimatedComboBox.cs" />
     <Compile Include="Controls\AutoHideGrid.cs" />
     <Compile Include="Controls\BusyScreen.xaml.cs">
@@ -187,6 +202,9 @@
     </Compile>
     <Compile Include="Controls\CommentListItem.xaml.cs">
       <DependentUpon>CommentListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CommitListItem.xaml.cs">
+      <DependentUpon>CommitListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomFrame.cs" />
     <Compile Include="Controls\Hilite_meHighlightStylePreviewControl.xaml.cs">
@@ -199,8 +217,17 @@
     <Compile Include="Controls\IssueListItem.xaml.cs">
       <DependentUpon>IssueListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LabelListItem.xaml.cs">
+      <DependentUpon>LabelListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OrganizationListItem.xaml.cs">
       <DependentUpon>OrganizationListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PullRequestListItem.xaml.cs">
+      <DependentUpon>PullRequestListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReleaseListItem.xaml.cs">
+      <DependentUpon>ReleaseListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RepoListItem.xaml.cs">
       <DependentUpon>RepoListItem.xaml</DependentUpon>
@@ -214,10 +241,14 @@
     <Compile Include="Controls\UserListItem.xaml.cs">
       <DependentUpon>UserListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ColorStringToColorBrushConverter.cs" />
     <Compile Include="Converters\EventTypeToActionStringConverter.cs" />
     <Compile Include="Converters\EventTypeToCommentStringConverter.cs" />
     <Compile Include="Converters\EventTypeToSymbolConverter.cs" />
+    <Compile Include="Converters\ForegroundFromBackgroundConverter.cs" />
+    <Compile Include="Converters\IssueDetailStringConverter.cs" />
     <Compile Include="Converters\NotifTypeToSymbolConverter.cs" />
+    <Compile Include="Converters\PullRequestDetailStringConverter.cs" />
     <Compile Include="Converters\RepositoryCreationTimeConverter.cs" />
     <Compile Include="Converters\RepositoryContentToFileIconConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -234,12 +265,15 @@
     <Compile Include="Models\WrappedWebResult.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\AppCredentials.cs" />
+    <Compile Include="Services\GistUtility.cs" />
     <Compile Include="Services\Hilite-me\HiliteAPI.cs" />
     <Compile Include="Services\Hilite-me\SyntaxHighlightStyle.cs" />
     <Compile Include="Services\HtmlParseService.cs" />
     <Compile Include="Services\IAsyncNavigationService.cs" />
+    <Compile Include="Services\IssueUtility.cs" />
     <Compile Include="Services\NotificationsService.cs" />
     <Compile Include="Services\OrganizationsUtility.cs" />
+    <Compile Include="Services\PullRequestUtility.cs" />
     <Compile Include="Services\SearchUtility.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UserUtility.cs" />
@@ -255,8 +289,9 @@
     <Compile Include="ViewModels\IssuesViewmodel.cs" />
     <Compile Include="ViewModels\MyOrganizationsViewmodel.cs" />
     <Compile Include="ViewModels\NotificationsViewmodel.cs" />
-    <Compile Include="ViewModels\RepoListViewmodel.cs" />
     <Compile Include="ViewModels\AppearenceSettingsViewModel.cs" />
+    <Compile Include="ViewModels\PullRequestDetailViewmodel.cs" />
+    <Compile Include="ViewModels\PullRequestsViewmodel.cs" />
     <Compile Include="ViewModels\SourceCodeViewmodel.cs" />
     <Compile Include="Views\AboutSettingsView.xaml.cs">
       <DependentUpon>AboutSettingsView.xaml</DependentUpon>
@@ -301,15 +336,15 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\RepositoryUtility.cs" />
     <Compile Include="ViewModels\AppViewmodel.cs" />
-    <Compile Include="ViewModels\HomeViewmodel.cs" />
+    <Compile Include="ViewModels\TrendingViewmodel.cs" />
     <Compile Include="ViewModels\MainViewmodel.cs" />
     <Compile Include="ViewModels\MyReposViewmodel.cs" />
     <Compile Include="ViewModels\ProfileViewmodel.cs" />
     <Compile Include="ViewModels\RepoDetailViewmodel.cs" />
     <Compile Include="ViewModels\SearchViewmodel.cs" />
     <Compile Include="ViewModels\SettingsViewmodel.cs" />
-    <Compile Include="Views\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
+    <Compile Include="Views\TrendingView.xaml.cs">
+      <DependentUpon>TrendingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MyOrganizationsView.xaml.cs">
       <DependentUpon>MyOrganizationsView.xaml</DependentUpon>
@@ -323,11 +358,14 @@
     <Compile Include="Views\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PullRequestDetailView.xaml.cs">
+      <DependentUpon>PullRequestDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PullRequestsView.xaml.cs">
+      <DependentUpon>PullRequestsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RepoDetailView.xaml.cs">
       <DependentUpon>RepoDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RepoListView.xaml.cs">
-      <DependentUpon>RepoListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -344,7 +382,6 @@
     <Content Include="Assets\Images\appLogoPurple.png" />
     <Content Include="Assets\Images\codeBack.jpg" />
     <Content Include="Assets\Images\placeholder.jpg" />
-    <Content Include="Assets\Noise.jpg" />
     <Content Include="Assets\profile-placeholder.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
@@ -400,6 +437,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CommitListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Hilite_meHighlightStylePreviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -412,9 +453,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LabelListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\OrganizationListItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PullRequestListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReleaseListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RepoListItem.xaml">
       <SubType>Designer</SubType>
@@ -499,7 +552,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\HomeView.xaml">
+    <Page Include="Views\TrendingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -519,11 +572,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RepoDetailView.xaml">
+    <Page Include="Views\PullRequestDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RepoListView.xaml">
+    <Page Include="Views\PullRequestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepoDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -552,14 +609,16 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="UICompositionAnimations">
-      <HintPath>Libs\UICompositionAnimations\UICompositionAnimations.dll</HintPath>
-    </Reference>
+    <Folder Include="MultilingualResources\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.PriResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

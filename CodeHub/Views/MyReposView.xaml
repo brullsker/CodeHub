@@ -16,20 +16,25 @@
         <converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" x:Name="ReverseBooleanToVisibilityConverter" />
 
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="Transparent">
 
         <!--  Empty grid to provide grey background to pivot headers  -->
         <Grid Height="48"
               VerticalAlignment="Top"
               Background="{ThemeResource SystemChromeLowColor}" />
-        <Pivot SelectionChanged="{x:Bind ViewModel.Pivot_SelectionChanged}">
+        <Pivot Style="{StaticResource CustomPivotStyle}"
+               SelectionChanged="{x:Bind ViewModel.Pivot_SelectionChanged}">
+            <Pivot.Resources>
+                <Style TargetType="PivotHeaderItem" BasedOn="{StaticResource CustomPivotHeaderItemStyle}" />
+            </Pivot.Resources>
             <PivotItem Margin="0">
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="15"
-                                   Margin="0 0 12 0"
+                        <TextBlock x:Uid="owned"
+                                   FontSize="15"
+                                   Margin="0 0 8 0"
                                    FontWeight="Normal"
-                                   Text="all" />
+                                   />
                         <TextBlock Style="{StaticResource FollowerCountStyle}" Text="{x:Bind ViewModel.Repositories.Count, Mode=OneWay}" />
                     </StackPanel>
                 </PivotItem.Header>
@@ -46,7 +51,6 @@
                     <toolkitControl:PullToRefreshListView x:Name="RepoListView"
                                                           Grid.Row="1"
                                                           IsItemClickEnabled="True"
-                                                          IsPullToRefreshWithMouseEnabled="True"
                                                           ItemClick="{x:Bind ViewModel.RepoDetailNavigateCommand}"
                                                           ItemContainerStyle="{StaticResource RepoListViewItemStyle}"
                                                           ItemsSource="{x:Bind ViewModel.Repositories, Mode=OneWay}"
@@ -72,9 +76,9 @@
                         </toolkitControl:PullToRefreshListView.RefreshIndicatorContent>
                     </toolkitControl:PullToRefreshListView>
 
-                    <TextBlock Style="{StaticResource ZeroItemsTextBoxStyle}"
+                    <TextBlock x:Uid="noRepositoryTip"
+                               Style="{StaticResource ZeroItemsTextBoxStyle}"
                                Grid.Row="1"
-                               Text="No Repositories yet"
                                Visibility="{x:Bind ViewModel.ZeroRepo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                     <ProgressRing Grid.Row="1"
                                   Width="50"
@@ -89,10 +93,10 @@
             <PivotItem Margin="0">
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="15"
-                                   Margin="0 0 12 0"
-                                   FontWeight="Normal"
-                                   Text="starred" />
+                        <TextBlock x:Uid="starred"
+                                   FontSize="15"
+                                   Margin="0 0 8 0"
+                                   FontWeight="Normal" />
                         <TextBlock Style="{StaticResource FollowerCountStyle}" Text="{x:Bind ViewModel.StarredRepositories.Count, Mode=OneWay}" />
                     </StackPanel>
                 </PivotItem.Header>
@@ -109,7 +113,6 @@
                     <toolkitControl:PullToRefreshListView x:Name="StarredRepoListView"
                                                           Grid.Row="1"
                                                           IsItemClickEnabled="True"
-                                                          IsPullToRefreshWithMouseEnabled="True"
                                                           ItemClick="{x:Bind ViewModel.RepoDetailNavigateCommand}"
                                                           ItemContainerStyle="{StaticResource RepoListViewItemStyle}"
                                                           ItemsSource="{x:Bind ViewModel.StarredRepositories, Mode=OneWay}"
@@ -135,9 +138,9 @@
 
                     </toolkitControl:PullToRefreshListView>
 
-                    <TextBlock Style="{StaticResource ZeroItemsTextBoxStyle}"
+                    <TextBlock x:Uid="noStarredRepositoryTip"
+                               Style="{StaticResource ZeroItemsTextBoxStyle}"
                                Grid.Row="1"
-                               Text="No starred Repositories yet"
                                Visibility="{x:Bind ViewModel.ZeroStarRepo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                     <ProgressRing Grid.Row="1"
                                   Width="50"

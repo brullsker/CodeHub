@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace CodeHub.Views
 {
@@ -39,10 +40,14 @@ namespace CodeHub.Views
             base.OnNavigatedTo(e);
             await ViewModel.Load(e.Parameter as string);
 
-            if (ViewModel.Developer.Type == Octokit.AccountType.Organization)
-                Messenger.Default.Send(new GlobalHelper.SetHeaderTextMessageType { PageName = "Organization" });
-            else
-                Messenger.Default.Send(new GlobalHelper.SetHeaderTextMessageType { PageName = "Profile" });
+            if(ViewModel.Developer!= null)
+            {
+                if (ViewModel.Developer.Type == Octokit.AccountType.Organization)
+                    Messenger.Default.Send(new GlobalHelper.SetHeaderTextMessageType { PageName = "Organization" });
+                else
+                    Messenger.Default.Send(new GlobalHelper.SetHeaderTextMessageType { PageName = "Profile" });
+            }
+           
         }
     }
 }

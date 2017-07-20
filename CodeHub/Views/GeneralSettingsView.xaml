@@ -7,7 +7,7 @@
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               mc:Ignorable="d">
 
-    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    <ScrollViewer Background="Transparent"
                   HorizontalScrollBarVisibility="Disabled"
                   HorizontalScrollMode="Disabled"
                   VerticalScrollBarVisibility="Auto"
@@ -28,36 +28,43 @@
         </VisualStateManager.VisualStateGroups>
         <StackPanel Margin="12">
             <!--  Enable Ads  -->
-            <TextBlock HorizontalAlignment="Left"
+            <TextBlock x:Uid="adSetting"
+                       HorizontalAlignment="Left"
                        FontSize="20"
-                       FontWeight="SemiLight"
-                       Text="Support Development, Enable Ads" />
+                       FontWeight="SemiLight" />
 
             <ToggleSwitch Margin="0,8,0,0" IsOn="{x:Bind ViewModel.IsAdsEnabled, Mode=TwoWay}" />
 
-            <!--  Show Readme  -->
-            <TextBlock Margin="0,12,0,0"
-                       HorizontalAlignment="Left"
-                       FontSize="20"
-                       FontWeight="SemiLight"
-                       Text="Show README in Repository page"
-                       TextWrapping="Wrap" />
-            <ToggleSwitch Margin="0,4,0,0" IsOn="{x:Bind ViewModel.ShowReadmeInRepoPage, Mode=TwoWay}" />
-
             <!--  Load commit messages  -->
-            <TextBlock Margin="0,12,0,0"
+            <TextBlock x:Uid="loadCommitMessage"
+                       Margin="0,12,0,0"
                        HorizontalAlignment="Left"
                        FontSize="20"
                        FontWeight="SemiLight"
-                       Text="Load commit messages for files"
                        TextWrapping="Wrap" />
             <ToggleSwitch Margin="0,4,0,0" IsOn="{x:Bind ViewModel.LoadCommitsInfo, Mode=TwoWay}" />
 
-            <TextBlock Margin="0,20,0,0"
+            <!--  Check for notifications frequently  -->
+            <!--<TextBlock x:Uid="checkNotificationsFrequently"
+                       Margin="0,12,0,0"
+                       HorizontalAlignment="Left"
+                       FontSize="20"
+                       FontWeight="SemiLight"
+                       TextWrapping="Wrap" />
+            <TextBlock Margin="0,12,0,0"
+                       HorizontalAlignment="Left"
+                       FontSize="15"
+                       FontWeight="SemiLight"
+                       Foreground="Gray"
+                       Text="Turning this on will consume more data"
+                       TextWrapping="Wrap" />
+            <ToggleSwitch Margin="0,4,0,0" IsOn="{x:Bind ViewModel.IsNotificationCheckEnabled, Mode=TwoWay}" />-->
+
+            <TextBlock x:Uid="syntaxHightlignting"
+                       Margin="0,20,0,0"
                        HorizontalAlignment="Left"
                        FontSize="22"
-                       FontWeight="SemiLight"
-                       Text="Syntax Highlighting style" />
+                       FontWeight="SemiLight" />
 
             <!--  Style  -->
             <controls:AnimatedComboBox x:Name="SyntaxStyleCombobox"
@@ -69,7 +76,8 @@
                                        Style="{StaticResource AnimatedComboBoxStyle}" />
 
             <!--  Line numbers  -->
-            <TextBlock Margin="0,20,0,0"
+            <TextBlock x:Uid="showLineNumber"
+                       Margin="0,20,0,0"
                        HorizontalAlignment="Left"
                        FontSize="18"
                        FontWeight="SemiLight"
@@ -77,11 +85,11 @@
             <ToggleSwitch Margin="0,4,0,0" IsOn="{x:Bind ViewModel.ShowLineNumbers, Mode=TwoWay}" />
 
             <!--  Preview  -->
-            <TextBlock Margin="0,20,0,0"
+            <TextBlock x:Uid="preview"
+                       Margin="0,20,0,0"
                        HorizontalAlignment="Left"
                        FontSize="17"
-                       FontWeight="SemiLight"
-                       Text="Preview" />
+                       FontWeight="SemiLight" />
             <controls:Hilite_meHighlightStylePreviewControl Height="200"
                                                             Margin="0,12,0,0"
                                                             HighlightStyle="{x:Bind ViewModel.HighlightStyle, Mode=OneWay}"
