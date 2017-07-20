@@ -163,6 +163,9 @@
     <value>$0,99 spenden</value>
     <comment>Just keep the currencies in USD. after user click donate the IAP popup will shown in user's local currency</comment>
   </data>
+  <data name="firstDonateTierDescription.Text" xml:space="preserve">
+    <value>Kaufe den Entwicklern einen Kaffee.</value>
+  </data>
   <data name="followButton.Content" xml:space="preserve">
     <value>Folgen</value>
   </data>
@@ -175,6 +178,9 @@
   <data name="fourthDonateTierAmount.Content" xml:space="preserve">
     <value>$9,99 spenden</value>
     <comment>Just keep the currencies in USD. after user click donate the IAP popup will shown in user's local currency</comment>
+  </data>
+  <data name="fourthDonateTierDescription.Text" xml:space="preserve">
+    <value>Spende diesen unglaublichen Betrag, wenn du dich gerade großzügig fühlst und CodeHub liebst.</value>
   </data>
   <data name="loadCommitMessage.Text" xml:space="preserve">
     <value>Commit-Meldungen für Dateien laden</value>
@@ -195,6 +201,9 @@
     <value>$2,99 spenden</value>
     <comment>Just keep the currencies in USD. after user click donate the IAP popup will shown in user's local currency</comment>
   </data>
+  <data name="secondDonateTierDescription.Text" xml:space="preserve">
+    <value>Mache den Entwicklern ein Geschenk.</value>
+  </data>
   <data name="showLineNumber.Text" xml:space="preserve">
     <value>Zeilen nummerieren</value>
   </data>
@@ -207,6 +216,9 @@
   <data name="thirdDonateTierAmount.Content" xml:space="preserve">
     <value>$4,99 spenden</value>
     <comment>Just keep the currencies in USD. after user click donate the IAP popup will shown in user's local currency</comment>
+  </data>
+  <data name="thirdDonateTierDescription.Text" xml:space="preserve">
+    <value>Unterstütze die Entwicklung von CodeHub aktiv mit dieser tollen Spende.</value>
   </data>
   <data name="unfollowButton.Content" xml:space="preserve">
     <value>Nicht mehr folgen</value>
@@ -323,7 +335,7 @@
   <data name="noResult.Text" xml:space="preserve">
     <value>Keine Ergebnisse</value>
   </data>
-  <data name="searchAutoSuggestBox.PlaceholderText" xml:space="preserve">
+  <data name="searchAutoSuggestBox.Text" xml:space="preserve">
     <value>Suchen</value>
   </data>
   <data name="signIn.Content" xml:space="preserve">
@@ -405,10 +417,10 @@
   <data name="blurContentBehindWindow.Text" xml:space="preserve">
     <value>Inhalt hinterm Fenster mit Blur-Effekt anzeigen</value>
   </data>
-  <data name="fifthDonateTierAmount.Content" xml:space="preserve">
+  <data name="fifthDonateTierDescription.Content" xml:space="preserve">
     <value>$14,99 spenden</value>
   </data>
-  <data name="sixthDonateTierAmount.Content" xml:space="preserve">
+  <data name="sixthDonateTierDescription.Content" xml:space="preserve">
     <value>$19,99 spenden</value>
   </data>
   <data name="owned.Text" xml:space="preserve">
@@ -416,11 +428,5 @@
   </data>
   <data name="save.Content" xml:space="preserve">
     <value>Speichern</value>
-  </data>
-  <data name="checkNotificationsFrequently.Text" xml:space="preserve">
-    <value>Check for Notifications frequently</value>
-  </data>
-  <data name="markAllAsRead.Label" xml:space="preserve">
-    <value>Mark all as read</value>
   </data>
 </root>
